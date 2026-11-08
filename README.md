@@ -24,6 +24,43 @@ The prototype uses fictional test accounts and balances only. No real money, cry
 6. If disputed, the independent reviewer determines the final allocation.
 7. The agreement becomes settled.
 
+## Sequence Diagram
+
+The following diagram shows the main dispute-settlement flow implemented in the RentProp prototype.
+
+```mermaid
+sequenceDiagram
+    participant Landlord
+    participant Tenant
+    participant Reviewer as Independent Reviewer
+    participant Escrow as RentalEscrow
+
+    Landlord->>Escrow: createAgreement(tenant, reviewer, 200000)
+    Escrow-->>Landlord: Agreement #0 created
+
+    Tenant->>Escrow: confirmAgreement(0)
+    Escrow-->>Tenant: Agreement confirmed
+
+    Tenant->>Escrow: depositTestFunds(0)
+    Escrow-->>Tenant: 200000 TEST UNITS recorded
+
+    Landlord->>Escrow: proposeSettlement(0, 50000, 150000)
+    Escrow-->>Landlord: Settlement proposed
+
+    Tenant->>Escrow: disputeSettlement(0)
+    Escrow-->>Tenant: Status = DISPUTED
+
+    Reviewer->>Escrow: resolveDispute(0, 20000, 180000)
+    Escrow-->>Reviewer: Dispute resolved
+
+    Escrow-->>Landlord: Final allocation = 20000
+    Escrow-->>Tenant: Final allocation = 180000
+
+    Note over Escrow: State = SETTLED
+```
+
+> Educational prototype running on a local Hardhat development network. All balances are fictional test units.
+
 ## Technology
 
 - Solidity
