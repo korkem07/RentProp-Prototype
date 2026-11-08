@@ -27,5 +27,5 @@
 # Gas snapshot files
 /.gas-snapshot
 
-# Snapshot cheatcodes output
+#Snapshot cheatcodes output
 /snapshots
