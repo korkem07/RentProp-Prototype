@@ -121,4 +121,4 @@ No real funds, cryptocurrency, private customer information, seed phrases, or pr
 
 ## Demo Video
 
-Demo video link: To be added after recording.
+[Watch the RentProp Prototype Demo](https://astanait-my.sharepoint.com/:v:/r/personal/254062_astanait_edu_kz/_layouts/15/stream.aspx?id=%2Fpersonal%2F254062_astanait_edu_kz%2FDocuments%2FRentProp%20Final%20Project%2FTeam04_FP_Demo.mp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&share=cQqM4AIJWzzATbsxv-TInFxlEgUCFutjHBWNPG5vX4GB6DVoOw)
