@@ -254,4 +254,73 @@ describe("RentalEscrow", function () {
       "Agreement is not disputed"
     );
   });
+
+  // TEST 9 (new)
+  it("rejects a settlement below the deposit", async function () {
+    await createFundedAgreement();
+
+    await expect(
+      escrow
+        .connect(landlord)
+        .proposeSettlement(
+          0,
+          50_000n,
+          100_000n
+        )
+    ).to.be.revertedWith(
+      "Allocation must equal deposit"
+    );
+  });
+
+  // TEST 10 (new)
+  it("allows only the tenant to approve or dispute a proposal", async function () {
+    await createFundedAgreement();
+
+    await escrow
+      .connect(landlord)
+      .proposeSettlement(
+        0,
+        50_000n,
+        150_000n
+      );
+
+    await expect(
+      escrow.connect(stranger).approveSettlement(0)
+    ).to.be.revert(ethers);
+
+    await expect(
+      escrow.connect(stranger).disputeSettlement(0)
+    ).to.be.revert(ethers);
+
+    await escrow
+      .connect(tenant)
+      .disputeSettlement(0);
+
+    const agreement = await escrow.agreements(0);
+
+    // State.Disputed = 4
+    expect(agreement.state).to.equal(4n);
+  });
+
+  // TEST 11 (new)
+  it("allows only the tenant to record the test deposit", async function () {
+    await createAgreement();
+
+    await escrow
+      .connect(tenant)
+      .confirmAgreement(0);
+
+    await expect(
+      escrow.connect(stranger).depositTestFunds(0)
+    ).to.be.revert(ethers);
+
+    await escrow
+      .connect(tenant)
+      .depositTestFunds(0);
+
+    const agreement = await escrow.agreements(0);
+
+    // State.Funded = 2
+    expect(agreement.state).to.equal(2n);
+  });
 });
